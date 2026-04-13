@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float fireRate = 0.2f;
     private float nextFireTime = 0f;
     public Transform firePoint;
+    private float lifeTime = 3f;
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -59,5 +60,7 @@ public class Player : MonoBehaviour
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = lastDirection * bulletSpeed;
+
+        Destroy(bullet, lifeTime);
     }
 }
