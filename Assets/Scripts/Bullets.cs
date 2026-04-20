@@ -9,6 +9,9 @@ public class Bullets : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy (gameObject);
+        if (other.gameObject.CompareTag("Enemigo"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

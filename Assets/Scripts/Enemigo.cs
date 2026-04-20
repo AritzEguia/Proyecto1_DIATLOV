@@ -21,9 +21,12 @@ public class Enemigo : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, objetivo.position, velocidad * Time.deltaTime);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        vidaMaxima -= 10;
+        if (collision.gameObject.CompareTag("Bala"))
+        {
+            vidaMaxima -= 10;
+        }
         if (vidaMaxima <= 0)
         {
             Destroy(enemiePrefab);
