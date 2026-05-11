@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemigo : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Enemigo : MonoBehaviour
     [Header("Seguimiento")]
     public Transform objetivo;
     public float velocidad = 5f;
+    public Rigidbody2D rb;
 
     void Start()
     {
@@ -18,7 +20,7 @@ public class Enemigo : MonoBehaviour
     {
         if (objetivo != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, objetivo.position, velocidad * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, objetivo.position, velocidad * Time.deltaTime);
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
@@ -26,10 +28,16 @@ public class Enemigo : MonoBehaviour
         if (collision.gameObject.CompareTag("Bala"))
         {
             vidaMaxima -= 10;
+            
+            Retroceso();
         }
         if (vidaMaxima <= 0)
         {
             Destroy(enemiePrefab);
         }
     }   
+    void Retroceso()
+    {
+        
+    }
 }
