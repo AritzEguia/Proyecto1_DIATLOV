@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886521b2ee5675d429871d997a874abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombreEscena: EnemySpawner
+  nombreEscena: SampleScene
 --- !u!1 &1133300131
 GameObject:
   m_ObjectHideFlags: 0
