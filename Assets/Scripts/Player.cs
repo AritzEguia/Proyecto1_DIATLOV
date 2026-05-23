@@ -49,10 +49,10 @@ public class Player : MonoBehaviour
         {
             lastDirection = movementInput;
         }
-        else if (movementInput == Vector2.zero) 
-        { 
-            lastDirection = Vector2.down;
-        }
+        //else if (movementInput == Vector2.zero) 
+        //{ 
+        //    lastDirection = Vector2.down;
+        //}
         if (Input.GetKey(KeyCode.Space) && Time.time >= nextFireTime)
         {
             Shoot();
