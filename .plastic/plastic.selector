@@ -1,0 +1,4 @@
+repository "DIATLOV 2026-04-13_12-30-12/Proyecto1_DIATLOV@20067556988248@cloud"
+  path "/"
+    br "/main"
+    co "/main"
