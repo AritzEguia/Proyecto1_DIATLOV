@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemigo;
     [SerializeField]
-    private float enemigoInterval = 3.5f;
+    public float enemigoInterval = 3.5f;
     [SerializeField]
     public int numeroEnemigos  = 3;
 
@@ -19,19 +19,18 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
         int contador = 0;
-        while (contador != numeroEnemigos)
-        {
-            GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5f), Random.Range(-6f, 6f), 0), Quaternion.identity);
-            contador++;
-            yield return new WaitForSeconds(interval);
-        }
+        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-10f, 10f), Random.Range(-6f, 6f), 0), Quaternion.identity);
+        yield return new WaitForSeconds(interval);
+
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!spawning)
-        {
-            spawning = true;
-            StartCoroutine(spawnEnemy(enemigoInterval, enemigo));
+        if(collision.gameObject.CompareTag("Player")){
+            if (!spawning)
+            {
+                spawning = true;
+                StartCoroutine(spawnEnemy(enemigoInterval, enemigo));
+            }
         }
     }
 }

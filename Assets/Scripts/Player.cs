@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using System;
 public class Player : MonoBehaviour
 {
     [Header("Disparo")]
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public float VidaMax = 100f;
     private float VidaActual;
     public Image barraDeVida;
+    public event EventHandler MuerteJugador;
 
     void Start()
     {
@@ -88,6 +90,7 @@ public class Player : MonoBehaviour
     {
         if (VidaActual <= 0)
         {
+            MuerteJugador?.Invoke(this, EventArgs.Empty);
             Destroy(player);
         }
     }
