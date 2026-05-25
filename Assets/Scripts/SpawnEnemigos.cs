@@ -18,10 +18,14 @@ public class EnemySpawner : MonoBehaviour
     }
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
-        int contador = 0;
-        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-10f, 10f), Random.Range(-6f, 6f), 0), Quaternion.identity);
-        yield return new WaitForSeconds(interval);
-
+            int contador = 0;
+            while (contador != 3)
+            {
+                GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-40f, -1f), Random.Range(-28f, -5f), 0), Quaternion.identity);
+                contador++;
+            }
+            yield return new WaitForSeconds(interval);
+            spawning = false;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -12,10 +12,11 @@ public class Player : MonoBehaviour
     private float nextFireTime = 0f;
     public Transform firePoint;
     private float lifeTime = 3f;
+    public int balasTotales = 30;
+    public int balasActuales = 30;
 
     [Header("Movimiento")]
     public float speed = 5f;
-
     public GameObject player;
     private Rigidbody2D rb2D;
     private Vector2 movementInput;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     private float VidaActual;
     public Image barraDeVida;
     public event EventHandler MuerteJugador;
+    public bool Muerto = false;
 
     void Start()
     {
@@ -57,8 +59,8 @@ public class Player : MonoBehaviour
         //}
         if (Input.GetKey(KeyCode.Space) && Time.time >= nextFireTime)
         {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
+                Shoot();
+                nextFireTime = Time.time + fireRate;
         }
         Death();
     }
@@ -74,7 +76,7 @@ public class Player : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = lastDirection * bulletSpeed;
 
-
+        balasActuales--;
         Destroy(bullet, lifeTime);
     }
 
@@ -90,6 +92,7 @@ public class Player : MonoBehaviour
     {
         if (VidaActual <= 0)
         {
+            Muerto = true;
             MuerteJugador?.Invoke(this, EventArgs.Empty);
             Destroy(player);
         }
