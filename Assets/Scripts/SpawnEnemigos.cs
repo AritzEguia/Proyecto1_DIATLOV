@@ -9,32 +9,32 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemigo;
     [SerializeField]
     public float enemigoInterval = 3.5f;
-    [SerializeField]
-    public int numeroEnemigos  = 3;
 
-    private bool spawning = false;
+    private int numeroEnemigos  = 10;
+    
+    static int spawnedNumber = 0;
+
+    private bool enemySpawned = false;
+
     void Start()
     {
     }
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
-            int contador = 0;
-            while (contador != 3)
-            {
-                GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-40f, -1f), Random.Range(-28f, -5f), 0), Quaternion.identity);
-                contador++;
-            }
+        while (spawnedNumber < numeroEnemigos)
+        {
+            GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-40f, -1f), Random.Range(-28f, -5f), 0), Quaternion.identity);
+            spawnedNumber++;
+            Debug.Log(spawnedNumber);
             yield return new WaitForSeconds(interval);
-            spawning = false;
+        }
+        enemySpawned = false;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player")){
-            if (!spawning)
-            {
-                spawning = true;
-                StartCoroutine(spawnEnemy(enemigoInterval, enemigo));
-            }
+        if(collision.gameObject.CompareTag("Player") && !enemySpawned){
+            StartCoroutine(spawnEnemy(enemigoInterval, enemigo));
+            enemySpawned=true;
         }
     }
 }

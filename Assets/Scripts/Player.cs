@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     public event EventHandler MuerteJugador;
     public bool Muerto = false;
 
+
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();

@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         animator = GetComponent<Animator>();
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()
@@ -37,6 +38,10 @@ public class Enemy : MonoBehaviour
         enMovimiento = true;
         agent.SetDestination(target.position);
         animator.SetBool("enMovimiento", enMovimiento);
+        
+        animator.SetFloat("Horizontal", agent.velocity.x);
+        animator.SetFloat("Vertical", agent.velocity.y);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
