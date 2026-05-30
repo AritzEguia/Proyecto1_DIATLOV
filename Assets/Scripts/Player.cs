@@ -2,9 +2,16 @@ using UnityEngine;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using TMPro;
 using System;
 public class Player : MonoBehaviour
 {
+    [Header("Municion")]
+    public int balasMaximas = 30;
+    private int balasActuales;
+    private int balasSumar;
+    public TMP_Text textoBalas;
+
     [Header("Disparo")]
     public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
@@ -12,8 +19,6 @@ public class Player : MonoBehaviour
     private float nextFireTime = 0f;
     public Transform firePoint;
     private float lifeTime = 3f;
-    public int balasTotales = 30;
-    public int balasActuales = 30;
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -37,6 +42,9 @@ public class Player : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         VidaActual = VidaMax;
+
+        balasActuales = balasMaximas;
+        ActualizarUIBalas();
     }
 
     void Update()
@@ -59,10 +67,26 @@ public class Player : MonoBehaviour
         //{ 
         //    lastDirection = Vector2.down;
         //}
-        if (Input.GetKey(KeyCode.Space) && Time.time >= nextFireTime)
+        if (Input.GetKey(KeyCode.Space) &&
+        Time.time >= nextFireTime &&
+        balasActuales > 0)
         {
-                Shoot();
-                nextFireTime = Time.time + fireRate;
+            Shoot();
+            balasActuales--;
+            if (balasActuales != 0)
+            {
+                balasSumar++;
+            }
+            ActualizarUIBalas();
+
+            nextFireTime = Time.time + fireRate;
+        }
+        if (Input.GetKeyDown(KeyCode.R) && balasMaximas > 0 && balasActuales < 30)
+        {
+            balasActuales += balasSumar;
+            balasMaximas -= balasSumar;
+            balasSumar = 0;
+            ActualizarUIBalas();
         }
         Death();
     }
@@ -70,7 +94,10 @@ public class Player : MonoBehaviour
     {
         rb2D.linearVelocity = movementInput * speed;
     }
-    
+    void ActualizarUIBalas()
+    {
+        textoBalas.text = balasActuales + " / " + balasMaximas;
+    }
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
@@ -78,7 +105,6 @@ public class Player : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = lastDirection * bulletSpeed;
 
-        balasActuales--;
         Destroy(bullet, lifeTime);
     }
 
@@ -88,6 +114,11 @@ public class Player : MonoBehaviour
         {
             VidaActual -= 10;
             barraDeVida.fillAmount = VidaActual / VidaMax;
+        }
+        if (other.gameObject.CompareTag("Municion"))
+        {
+            balasMaximas += 30;
+            ActualizarUIBalas();
         }
     }
     void Death()
