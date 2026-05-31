@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public int balasMaximas = 30;
     private int balasActuales;
     private int balasSumar;
+    private int municionReserva;
     public TMP_Text textoBalas;
 
     [Header("Disparo")]
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         VidaActual = VidaMax;
 
         balasActuales = balasMaximas;
+        municionReserva = balasMaximas;
         ActualizarUIBalas();
     }
 
@@ -73,7 +75,7 @@ public class Player : MonoBehaviour
         {
             Shoot();
             balasActuales--;
-            if (balasActuales != 0)
+            if (balasSumar < balasMaximas)
             {
                 balasSumar++;
             }
@@ -83,9 +85,11 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R) && balasMaximas > 0 && balasActuales < 30)
         {
-            balasActuales += balasSumar;
-            balasMaximas -= balasSumar;
-            balasSumar = 0;
+            int balasNecesarias = balasMaximas - balasActuales;
+            int balasARellenar = Mathf.Min(balasNecesarias, municionReserva);
+            balasActuales += balasARellenar;
+            municionReserva -= balasARellenar;
+
             ActualizarUIBalas();
         }
         Death();
@@ -96,7 +100,7 @@ public class Player : MonoBehaviour
     }
     void ActualizarUIBalas()
     {
-        textoBalas.text = balasActuales + " / " + balasMaximas;
+        textoBalas.text = balasActuales + " / " + municionReserva;
     }
     void Shoot()
     {
@@ -117,7 +121,7 @@ public class Player : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Municion"))
         {
-            balasMaximas += 30;
+            municionReserva += 30;
             ActualizarUIBalas();
         }
     }
