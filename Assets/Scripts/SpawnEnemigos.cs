@@ -10,15 +10,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     public float enemigoInterval = 3.5f;
 
-    private int numeroEnemigos  = 10;
+    public int numeroEnemigos  = 10;
     
     static int spawnedNumber = 0;
 
     private bool enemySpawned = false;
 
-    void Start()
-    {
-    }
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
         while (spawnedNumber < numeroEnemigos)

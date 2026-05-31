@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float vidaMaxima = 100f;
     public GameObject enemiePrefab;
     private Player muerto;
+    public static int numMuertos = 0;
 
     [Header("Navigation")]
     public Transform target;
@@ -21,7 +22,6 @@ public class Enemy : MonoBehaviour
     private Vector2 movementInput;
     private Rigidbody2D rb2D;
     private Animator animator;
-    private bool enMovimiento;
 
     void Start()
     {
@@ -35,14 +35,16 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        enMovimiento = true;
-        agent.SetDestination(target.position);
-        animator.SetBool("enMovimiento", enMovimiento);
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+        }
         
         animator.SetFloat("Horizontal", agent.velocity.x);
         animator.SetFloat("Vertical", agent.velocity.y);
         animator.SetFloat("Speed", agent.velocity.magnitude);
     }
+    
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Bala"))
