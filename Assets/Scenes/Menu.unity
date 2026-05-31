@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886521b2ee5675d429871d997a874abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombreEscena: SampleScene
+  nombreEscena: Mapa
 --- !u!1 &1133300131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,7 +1481,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d2f90443ba0965d4ba726a73deb845bf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

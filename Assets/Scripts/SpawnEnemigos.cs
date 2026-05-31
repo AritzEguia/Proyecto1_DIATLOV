@@ -11,7 +11,11 @@ public class EnemySpawner : MonoBehaviour
     public float enemigoInterval = 3.5f;
 
     public int numeroEnemigos  = 10;
-    
+    public int X1;
+    public int X2;
+    public int Y1;
+    public int Y2;
+
     static int spawnedNumber = 0;
 
     private bool enemySpawned = false;
@@ -20,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (spawnedNumber < numeroEnemigos)
         {
-            GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-40f, -1f), Random.Range(-28f, -5f), 0), Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(X1, X2), Random.Range(Y1, Y2), 0), Quaternion.identity);
             spawnedNumber++;
             Debug.Log(spawnedNumber);
             yield return new WaitForSeconds(interval);

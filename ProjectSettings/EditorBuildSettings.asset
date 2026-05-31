@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EnemySpawner.unity
     guid: 16c40452ef010874888d5add9d18c625
+  - enabled: 1
+    path: Assets/Scenes/Mapa.unity
+    guid: 8dcb5502742f6a84493cbddb603d089f
+  - enabled: 1
+    path: Assets/Scenes/Mazmorra jefe.unity
+    guid: 16cc3e8b2f8898640a1eefa7d0336d74
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

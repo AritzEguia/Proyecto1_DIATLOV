@@ -15,11 +15,13 @@ public class Player : MonoBehaviour
 
     [Header("Disparo")]
     public GameObject bulletPrefab;
+    public GameObject bombaPrefab;
     public float bulletSpeed = 10f;
     public float fireRate = 0.2f;
     private float nextFireTime = 0f;
     public Transform firePoint;
     private float lifeTime = 3f;
+    System.Random rnd = new System.Random();
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -104,8 +106,16 @@ public class Player : MonoBehaviour
     }
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-
+        GameObject bullet;
+        int numeroAleatorio = rnd.Next(1, 10000);
+        if (numeroAleatorio != 1)
+        {
+            bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+        }
+        else
+        {
+            bullet = Instantiate(bombaPrefab, firePoint.position, transform.rotation);
+        }
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = lastDirection * bulletSpeed;
 
@@ -123,6 +133,7 @@ public class Player : MonoBehaviour
         {
             municionReserva += 30;
             ActualizarUIBalas();
+            Destroy(other.gameObject);
         }
     }
     void Death()

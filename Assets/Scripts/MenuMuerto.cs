@@ -20,6 +20,7 @@ public class MenuMuerto : MonoBehaviour
     }
     public void reiniciar()
     {
+        Debug.Log("BOTON FUNCIONA");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void MenuInicial(string nombre)
