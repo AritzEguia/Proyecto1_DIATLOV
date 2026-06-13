@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private Vector2 movementInput;
     private Vector2 lastDirection = Vector2.down;
     private Animator animator;
+    public AudioSource pasos;
 
     [Header("Vida")]
     public float VidaMax = 100f;
@@ -62,7 +63,20 @@ public class Player : MonoBehaviour
         animator.SetFloat("Horizontal", movementInput.x);
         animator.SetFloat("Vertical", movementInput.y);
         animator.SetFloat("Speed", movementInput.magnitude);
-
+        if (movementInput != Vector2.zero)
+        {
+            if (!pasos.isPlaying)
+            {
+                pasos.Play();
+            }
+        }
+        else
+        {
+            if (pasos.isPlaying)
+            {
+                pasos.Stop();
+            }
+        }
         if (movementInput != Vector2.zero)
         {
             lastDirection = movementInput;
