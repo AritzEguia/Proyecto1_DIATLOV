@@ -52,11 +52,6 @@ public class Enemy : MonoBehaviour
             vidaMaxima -= 25;
             Parar();
         }
-        if (collision.gameObject.CompareTag("Bomba"))
-        {
-            vidaMaxima -= 10000000000000000;
-            Parar();
-        }
         if (vidaMaxima <= 0)
         {
             Destroy(enemiePrefab);

@@ -29,8 +29,4 @@ public class Volumen : MonoBehaviour
             imagenMute.enabled = false;
         }
     }
-    void Update()
-    {
-        
-    }
 }

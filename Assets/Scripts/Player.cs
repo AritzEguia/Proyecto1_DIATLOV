@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     private float nextFireTime = 0f;
     public Transform firePoint;
     private float lifeTime = 3f;
-    System.Random rnd = new System.Random();
 
     [Header("Movimiento")]
     public float speed = 5f;
@@ -121,18 +120,9 @@ public class Player : MonoBehaviour
     void Shoot()
     {
         GameObject bullet;
-        int numeroAleatorio = rnd.Next(1, 10000);
-        if (numeroAleatorio != 1)
-        {
-            bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-        }
-        else
-        {
-            bullet = Instantiate(bombaPrefab, firePoint.position, transform.rotation);
-        }
+        bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = lastDirection * bulletSpeed;
-
         Destroy(bullet, lifeTime);
     }
 

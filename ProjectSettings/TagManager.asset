@@ -8,11 +8,12 @@ TagManager:
   - Bala
   - Municion
   - Bomba
+  - accionador
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pared
   - Water
   - UI
   - 
